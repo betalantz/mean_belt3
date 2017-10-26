@@ -57,4 +57,49 @@ module.exports = {
                 res.status(500).json(err)
             })
     },
+    add_vote: (req, res) => {
+        console.log("req body for vote", req.body);
+        let poll_id = req.body.data.poll_id
+        let my_id = req.body.data.option_id
+        
+        // Poll.update(
+            //     {_id: id, options: my_id},
+            //     { $set:{"options.$.votes":"options.$.votes"+=1}},
+            //     { upsert: true},
+            //     (err) => {
+                //         console.log("updated votes", err)
+                //         res.status(200).json('all ok');
+                //     }
+                // )
+        Poll.findById({_id:poll_id})
+        .then(poll => {
+            let option = poll.options.id(my_id)
+            option.votes += 1
+            poll.save()
+                .then(() => {
+                    res.json(true)
+                })
+                .catch(err => {
+                    console.log('vote save error', err)
+                    res.status(500).json(err)
+                    })
+             })
+            .catch(err => {
+                console.log("Error in get_one", err);
+                res.status(500).json(err)
+            })
+    },
+    delete: (req, res) => {
+        let id = req.body.id
+        console.log("id got to controller", id);
+        Poll.remove({ _id: id }, function (err, poll) {
+            if(err){
+                console.log('Delete error in controller', err)
+            } else {
+                console.log('player deleted at controller')
+                res.json(true)
+            }
+        })
+            
+    },
 }

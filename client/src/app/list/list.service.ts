@@ -17,4 +17,8 @@ export class ListService {
   login_stat() {
     return this._http.get("/login_stat").map(data => data.json()).toPromise()
   }
+  del_one(id){
+    console.log('id at service', id);
+    return this._http.post('/delPlayer/', {id:id}).map(data => data.json()).toPromise()
+  }
 }

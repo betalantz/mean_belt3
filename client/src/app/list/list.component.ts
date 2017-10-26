@@ -27,4 +27,12 @@ export class ListComponent implements OnInit {
       .then(user => this.curr_user = user)
       .catch(() => this._router.navigate(["/login"]))
   }
+  delPoll(_id){
+    this._listservice.del_one(_id)
+    .then(() => 
+      this._listservice.get_all() 
+        .then(polls => this.polls = polls)
+        .catch(err => console.log('get_all error on comp', err)))
+    .catch(err => console.log('delPlayer error on comp', err))
+  }
 }

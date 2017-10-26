@@ -8,6 +8,7 @@
 </ul>
 <h2>Current Polls:</h2>
 <br>
+<div><input type="text" [(ngModel)]='searchText' placeholder="Search..."></div>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -18,7 +19,7 @@
     </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let poll of polls; let idx=index">
+  <tr *ngFor="let poll of polls | search: searchText">
       <td scope="row">{{poll.author}}</td>
       <td><a [routerLink]="['/survey', poll._id]">{{poll.question}}</a></td>
       <td>{{poll.createdAt | date: 'longDate' }}</td>
