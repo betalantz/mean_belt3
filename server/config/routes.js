@@ -6,5 +6,9 @@ module.exports = app => {
     app.post("/login", polls.login)
     app.post('/addPoll', polls.addPoll)
     app.get('/login_stat', polls.login_stat)
+    app.get('/logout', polls.logout)
+    app.get('/get_all', polls.get_all)
+    app.post('/get_one', polls.get_one)
+    
     app.get("*", (req, res) => res.sendFile(path.resolve("./client/dist/index.html")))
 }

@@ -1,3 +1,30 @@
-<p>
-  survey works!
-</p>
+<ul class="nav justify-content-end">
+  <li class="nav-item">
+    <a class="nav-link active" [routerLink]="['/list']">Go to Polls</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="/logout">Logout</a>
+  </li>
+</ul>
+<h2 *ngIf="poll">{{poll.question}}</h2>
+<br>
+<h4>Click on the Vote button to choose one.</h4>
+<br>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Current Vote Tally</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let option of poll.options; let idx=index">
+      <td scope="row">{{option.option}}</td>
+      <td>{{option.votes}}</td>
+      <td>
+          <button class="btn btn-primary btn-sm" (click)="adVote(option._id)">Vote</button>
+      </td>
+  </tr>
+  </tbody>
+</table>

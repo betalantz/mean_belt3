@@ -13,6 +13,8 @@ import { SurveyComponent } from './survey/survey.component';
 import { SearchPipe } from './search.pipe';
 import {LoginService} from './login/login.service'
 import { CreateService } from './create/create.service'
+import { ListService } from './list/list.service'
+import { SurveyService } from './survey/survey.service'
 
 
 @NgModule({
@@ -30,7 +32,7 @@ import { CreateService } from './create/create.service'
     FormsModule,
     HttpModule,
   ],
-  providers: [LoginService, CreateService],
+  providers: [LoginService, CreateService, ListService, SurveyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

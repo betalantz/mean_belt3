@@ -7,3 +7,24 @@
   </li>
 </ul>
 <h2>Current Polls:</h2>
+<br>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Survey Question</th>
+      <th>Date Posted</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let poll of polls; let idx=index">
+      <td scope="row">{{poll.author}}</td>
+      <td><a [routerLink]="['/survey', poll._id]">{{poll.question}}</a></td>
+      <td>{{poll.createdAt | date: 'longDate' }}</td>
+      <td>
+          <button *ngIf="poll.author == curr_user" class="btn btn-danger btn-sm" (click)="delPoll(poll._id)">Delete</button>
+      </td>
+  </tr>
+  </tbody>
+</table>

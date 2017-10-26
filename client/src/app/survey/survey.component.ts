@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router'
+import { SurveyService } from './survey.service'
+
+import { User } from './../user'
+import { Poll } from './../poll'
 
 @Component({
   selector: 'app-survey',
@@ -6,10 +11,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./survey.component.css']
 })
 export class SurveyComponent implements OnInit {
+  poll: Poll
+  poll_id
 
-  constructor() { }
-
+  constructor(private _surveyservice: SurveyService, private _route: ActivatedRoute) {
+    this._route.paramMap.subscribe( params => {
+      this.poll_id = params.get('id')
+      console.log("here's the passed id:", params.get('id'));
+    })
+   }
+  
   ngOnInit() {
+    this._surveyservice.get_one(this.poll_id) 
+    .then(poll => this.poll = poll)
+    .catch(err => console.log('get_one error on comp', err))
   }
-
+  addVote(){
+    
+  }
 }

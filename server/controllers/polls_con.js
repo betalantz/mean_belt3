@@ -15,21 +15,30 @@ module.exports = {
             res.status(401).json(false)
 		}
     },
-    // logout: (req, res) => {
-	// 	req.session.destroy()
-    //     console.log('user logged out');
-    //     res.redirect("/")
-	// },
-    // get_all: (req, res) => {
-	// 	Product.find()
-	// 		.then(products => {
-	// 			res.json(products)
-	// 		})
-	// 		.catch(err => {
-	// 			console.log("Product.find error", err)
-	// 			res.status(500).json(err)
-	// 		})
-    // },
+    logout: (req, res) => {
+		req.session.destroy()
+        console.log('user logged out');
+        res.redirect("/")
+	},
+    get_all: (req, res) => {
+		Poll.find()
+			.then(polls => {
+				res.json(polls)
+			})
+			.catch(err => {
+				console.log("Poll.find error", err)
+				res.status(500).json(err)
+			})
+    },
+    get_one: (req, res) => {
+        let id = req.body.id
+        Poll.findById({_id:id})
+            .then(poll => res.json(poll))
+            .catch(err => {
+                console.log("Error in get_one", err);
+                res.status(500).json(err)
+            })
+    },
     addPoll: (req, res) => {
         let poll = new Poll(req.body)
         console.log(poll)
