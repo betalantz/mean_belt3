@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { SurveyService } from './survey.service'
+import { Router } from "@angular/router"
 
 import { User } from './../user'
 import { Poll } from './../poll'
@@ -14,8 +15,9 @@ export class SurveyComponent implements OnInit {
   poll: Poll
   poll_id
   option_id
+  curr_user: User
 
-  constructor(private _surveyservice: SurveyService, private _route: ActivatedRoute) {
+  constructor(private _surveyservice: SurveyService, private _route: ActivatedRoute, private _router: Router) {
     this._route.paramMap.subscribe( params => {
       this.poll_id = params.get('id')
       console.log("here's the passed id:", params.get('id'));
@@ -39,5 +41,10 @@ export class SurveyComponent implements OnInit {
           .then(poll => this.poll = poll)
           .catch(err => console.log('get_one error on comp', err)))
       .catch(err => console.log('add_vote error on comp', err))
+  }
+  inSession() {
+    this._surveyservice.login_stat()
+      .then(user => this.curr_user = user)
+      .catch(() => this._router.navigate(["/login"]))
   }
 }

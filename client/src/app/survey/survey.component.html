@@ -6,7 +6,7 @@
     <a class="nav-link active" href="/logout">Logout</a>
   </li>
 </ul>
-<h2 *ngIf="poll">{{poll.question}}</h2>
+<h2 *ngIf="poll">{{poll?.question}}</h2>
 <br>
 <h4>Click on the Vote button to choose one.</h4>
 <br>
@@ -19,7 +19,7 @@
     </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let option of poll.option">
+  <tr *ngFor="let option of poll?.options">
       <td scope="row">{{option.option}}</td>
       <td>{{option.votes}}</td>
       <td>

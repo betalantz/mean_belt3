@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   }
   login() {
     this._loginservice.login(this.user)
-    .then(() => this._router.navigate(["/list"]) )
+    .then(() => this._router.navigate(["/list"]))
     .catch(err => console.log("user login error", err))
   }
 

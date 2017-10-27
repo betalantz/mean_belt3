@@ -1,9 +1,24 @@
-<h2>Welcome to Online Survey</h2>
-<h4>Please register your name.</h4>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h2 class="display-4">Welcome to</h2>
+        <h1 class="display-3">Survey Circus</h1>
+        <h4 class="lead">Please register your name.</h4>
+    </div>
+</div>
 <br>
 <form (submit)="login()" #loginForm='ngForm'>
   <div class="form-group">
-      <p><input type="text" name="name" [(ngModel)]="user.name"></p>
+      <p><input required minlength="2" type="text" name="name" [(ngModel)]="user.name" #userName='ngModel'></p>
   </div>
-      <button type="submit" class="btn btn-primary">Enter</button>
+  <div
+  class="alert alert-danger"
+  *ngIf="userName?.touched && !userName?.valid">
+    <div *ngIf="userName?.errors?.required">
+      A name is required.
+    </div>
+    <div *ngIf="userName?.errors?.minlength">
+      Name should be minimum {{userName.errors.minlength.requiredLength}} characters.
+    </div>
+  </div>
+      <button [disabled]='!loginForm.valid' type="submit" class="btn btn-primary">Enter</button>
 </form>

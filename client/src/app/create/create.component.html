@@ -1,33 +1,43 @@
-<form (submit)="addPoll()" #formData='ngForm'>
+<form (submit)="addPoll()" #formData='ngForm' *ngIf="new_poll">
   <div class="form-group">
     <label for="newQuestion">Question:</label>
     <textarea required minlength="8" class="form-control" id="newQuestion" rows="3" name="poll" [(ngModel)]="new_poll.question" #question='ngModel'></textarea>
   </div>
   <div
   class="alert alert-danger"
-  *ngIf="question.touched && !question.valid">
-    <div *ngIf="question.errors.required">
+  *ngIf="question?.touched && !question?.valid">
+    <div *ngIf="question?.errors.required">
       A question is required.
     </div>
-    <div *ngIf="question.errors.minlength">
+    <div *ngIf="question?.errors.minlength">
       Question should be minimum {{question.errors.minlength.requiredLength}} characters.
     </div>
   </div>
   <div class="form-group">
     <label class="col-form-label" for="option1">Option 1:</label>
-    <input required type="text" class="form-control" id="option1" name="option1"[(ngModel)]="new_poll.option1" #option1='ngModel'>
+    <input required minlength="3" type="text" class="form-control" id="option1" name="option1"[(ngModel)]="new_poll.option1" #option1='ngModel'>
   </div>
   <div class="form-group">
     <label class="col-form-label" for="option2">Option 2:</label>
-    <input required type="text" class="form-control" id="option2" name="option2" [(ngModel)]="new_poll.option2" #option2='ngModel'>
+    <input required minlength="3" type="text" class="form-control" id="option2" name="option2" [(ngModel)]="new_poll.option2" #option2='ngModel'>
   </div>
   <div class="form-group">
     <label class="col-form-label" for="option3">Option 3:</label>
-    <input required type="text" class="form-control" id="option3" name="option3" [(ngModel)]="new_poll.option3" #option3='ngModel'>
+    <input required minlength="3" type="text" class="form-control" id="option3" name="option3" [(ngModel)]="new_poll.option3" #option3='ngModel'>
   </div>
   <div class="form-group">
     <label class="col-form-label" for="option4">Option 4:</label>
-    <input required type="text" class="form-control" id="option4" name="option4" [(ngModel)]="new_poll.option4" #option4='ngModel'>
+    <input required minlength="3" type="text" class="form-control" id="option4" name="option4" [(ngModel)]="new_poll.option4" #option4='ngModel'>
+  </div>
+  <div
+  class="alert alert-danger"
+  *ngIf="option1?.touched && !option1?.valid || option2?.touched && !option2?.valid || option3?.touched && !option3?.valid || option4?.touched && !option4?.valid">
+    <div *ngIf="option1?.errors?.required || option2?.errors?.required || option2?.errors?.required || option4?.errors?.required">
+      All option fields are required.
+    </div>
+    <div *ngIf="option1?.errors?.minlength || option2?.errors?.minlength || option3?.errors?.minlength || option4?.errors?.minlength">
+      Options should be minimum 3 characters.
+    </div>
   </div>
   <a class="btn btn-secondary" [routerLink]="['/list']">Cancel</a>
   <button [disabled]='!formData.valid' class="btn btn-primary" type="submit">Create Poll</button>

@@ -17,7 +17,7 @@ export class SurveyService {
   add_vote(data){
     return this._http.post('/add_vote', {data:data}).map(data => data.json()).toPromise()
   }
-  // login_stat() {
-  //   return this._http.get("/login_stat").map(data => data.json()).toPromise()
-  // }
+  login_stat() {
+    return this._http.get("/login_stat").map(data => data.json()).toPromise()
+  }
 }
