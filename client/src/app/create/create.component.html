@@ -1,4 +1,4 @@
-<form (submit)="addPoll()" #formData='ngForm' *ngIf="new_poll">
+<form class="form-group m-5" (submit)="addPoll()" #formData='ngForm' *ngIf="new_poll">
   <div class="form-group">
     <label for="newQuestion">Question:</label>
     <textarea required minlength="8" class="form-control" id="newQuestion" rows="3" name="poll" [(ngModel)]="new_poll.question" #question='ngModel'></textarea>
