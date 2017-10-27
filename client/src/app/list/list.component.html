@@ -1,4 +1,5 @@
-<ul class="nav justify-content-end">
+
+<ul class="nav justify-content-end mt-3">
   <li class="nav-item">
     <a class="nav-link active" [routerLink]="['/create']">Create New Poll</a>
   </li>
@@ -6,11 +7,15 @@
     <a class="nav-link active" href="/logout">Logout</a>
   </li>
 </ul>
-<h2>Current Polls:</h2>
-<h3>Welcome, {{curr_user}}!</h3>
+<div class="jumbotron">
+  <h1 class="display-3">Survey Circus</h1>
+  <hr class="my-4">
+  <h2 class="lead">Welcome, {{curr_user}}!</h2>
+</div>
+<h3>Current Polls:</h3>
 <br>
-<div><input type="text" [(ngModel)]='searchText' placeholder="Search..."></div>
-<table class="table table-striped">
+<div class="border border-success rounded mb-3 pl-3"><input type="text" [(ngModel)]='searchText' placeholder="Search..."></div>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Name</th>
