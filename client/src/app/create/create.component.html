@@ -1,7 +1,17 @@
 <form (submit)="addPoll()" #formData='ngForm'>
   <div class="form-group">
     <label for="newQuestion">Question:</label>
-    <textarea required class="form-control" id="newQuestion" rows="3" name="poll" [(ngModel)]="new_poll.question" #question='ngModel'></textarea>
+    <textarea required minlength="8" class="form-control" id="newQuestion" rows="3" name="poll" [(ngModel)]="new_poll.question" #question='ngModel'></textarea>
+  </div>
+  <div
+  class="alert alert-danger"
+  *ngIf="question.touched && !question.valid">
+    <div *ngIf="question.errors.required">
+      A question is required.
+    </div>
+    <div *ngIf="question.errors.minlength">
+      Question should be minimum {{question.errors.minlength.requiredLength}} characters.
+    </div>
   </div>
   <div class="form-group">
     <label class="col-form-label" for="option1">Option 1:</label>

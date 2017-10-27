@@ -18,9 +18,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.inSession()
-    this._listservice.get_all() 
-    .then(polls => this.polls = polls)
-    .catch(err => console.log('get_all error on comp', err))
+    this.get_all()
   }
   inSession() {
     this._listservice.login_stat()
@@ -29,10 +27,12 @@ export class ListComponent implements OnInit {
   }
   delPoll(_id){
     this._listservice.del_one(_id)
-    .then(() => 
-      this._listservice.get_all() 
-        .then(polls => this.polls = polls)
-        .catch(err => console.log('get_all error on comp', err)))
-    .catch(err => console.log('delPlayer error on comp', err))
+      .then(() => this.get_all())
+      .catch(err => console.log('delPlayer error on comp', err))
+  }
+  get_all(){
+    this._listservice.get_all() 
+      .then(polls => this.polls = polls)
+      .catch(err => console.log('get_all error on comp', err))
   }
 }

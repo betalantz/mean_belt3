@@ -19,7 +19,7 @@
     </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let option of poll.options; let idx=index">
+  <tr *ngFor="let option of poll.option">
       <td scope="row">{{option.option}}</td>
       <td>{{option.votes}}</td>
       <td>
